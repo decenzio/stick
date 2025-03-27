@@ -86,6 +86,37 @@ type NFTEntity @entity {
   token: TokenEntity
 }
 
+type NFTAAEntity @entity {
+  id: ID!
+  collection: CollectionEntity!
+  blockNumber: BigInt @index
+  address: String! @index
+  createdAt: DateTime! @index
+  updatedAt: DateTime! @index
+  version: Int!
+  hash: String! @index
+}
+
+type NFTAATransfer @entity {
+  nftaa: NFTAAEntity!
+  blockNumber: BigInt @index
+  createdAt: DateTime! @index
+  updatedAt: DateTime! @index
+  version: Int!
+  hash: String! @index
+  from: String!
+  to: String!
+}
+
+type NFTAAProxyExecution @entity {
+  nftaa: NFTAAEntity!
+  blockNumber: BigInt @index
+  createdAt: DateTime! @index
+  updatedAt: DateTime! @index
+  version: Int!
+  hash: String! @index
+}
+
 # Entity to represent a Metadata
 # defined on chain as  pub type Metadata<T: Config<I>, I: 'static = ()>
 # https://github.com/paritytech/polkadot-sdk/blob/b8ad0d1f565659f004165c5244acba78828d0bf7/substrate/frame/nfts/src/lib.rs#L283
@@ -228,6 +259,9 @@ enum Interaction {
   PAY_ROYALTY
   OFFER
   SWAP
+  NFTAA_CREATE
+  NFTAA_TRANSFER
+  NFTAA_PROXY
   # ROYALTY
 }
 

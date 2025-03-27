@@ -45,7 +45,6 @@ export enum Unique {
   // setAssetMetadata = 'AssetRegistry.MetadataSet',
 }
 
-
 /**
  * NFTs Pallet Events
  * @enum {string}
@@ -120,4 +119,15 @@ export enum Asset {
   forceCreate = 'Assets.ForceCreated', // unused
   clearMetadata = 'Assets.ClassMetadataCleared', // unused
   setMetadata = 'Assets.MetadataSet',
+}
+
+/**
+ * NFT as an Account Pallet Events
+ * @enum {string}
+ * @readonly
+ */
+export enum NonFungibleAccount {
+  created = 'Nftaa.NFTAACreated',
+  transferred = 'Nftaa.NFTAATransferred',
+  executed = 'Nftaa.ProxyExecuted',
 }

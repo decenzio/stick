@@ -23,7 +23,7 @@ export class CollectionEvent {
     @StringColumn_({nullable: true})
     currentOwner!: string | undefined | null
 
-    @Column_("varchar", {length: 12, nullable: false})
+    @Column_("varchar", {length: 14, nullable: false})
     interaction!: Interaction
 
     @StringColumn_({nullable: false})

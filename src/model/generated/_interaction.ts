@@ -12,4 +12,7 @@ export enum Interaction {
     PAY_ROYALTY = "PAY_ROYALTY",
     OFFER = "OFFER",
     SWAP = "SWAP",
+    NFTAA_CREATE = "NFTAA_CREATE",
+    NFTAA_TRANSFER = "NFTAA_TRANSFER",
+    NFTAA_PROXY = "NFTAA_PROXY",
 }

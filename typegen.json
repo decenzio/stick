@@ -3,13 +3,7 @@
   "specVersions": "https://v2.archive.subsquid.io/metadata/asset-hub-kusama",
   "pallets": {
     "Assets": {
-      "events": [
-        "Created",
-        "Destroyed",
-        "ForceCreated",
-        "MetadataCleared",
-        "MetadataSet"
-      ],
+      "events": ["Created", "Destroyed", "ForceCreated", "MetadataCleared", "MetadataSet"],
       "calls": [],
       "storage": [],
       "constants": []
@@ -45,10 +39,7 @@
         "Transferred"
       ],
       "calls": [],
-      "storage": [
-        "Class",
-        "InstanceMetadataOf"
-      ],
+      "storage": ["Class", "InstanceMetadataOf"],
       "constants": []
     },
     "Nfts": {
@@ -91,13 +82,14 @@
         "TransferApproved",
         "Transferred"
       ],
-      "calls": [
-        "update_mint_settings"
-      ],
-      "storage": [
-        "Collection",
-        "ItemMetadataOf"
-      ],
+      "calls": ["update_mint_settings"],
+      "storage": ["Collection", "ItemMetadataOf"],
+      "constants": []
+    },
+    "Nftaa": {
+      "events": ["NFTAACreated", "NFTAATransferred", "ProxyExecuted"],
+      "calls": [],
+      "storage": ["NftAccounts"],
       "constants": []
     }
   }

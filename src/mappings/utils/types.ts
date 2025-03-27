@@ -6,19 +6,17 @@ import {
   Event as _Event,
   Extrinsic as _Extrinsic,
   type SubstrateBatchProcessor as SubstrateProcessor,
-  BlockHeader
+  BlockHeader,
 } from '@subsquid/substrate-processor'
 import { nanoid } from 'nanoid'
-// impsort { Interaction } from '../../model/generated/_interaction';
 import { Store as SquidStore } from '@subsquid/typeorm-store'
 import { EntityManager } from 'typeorm'
-import { Logger } from '@subsquid/logger'
 import { Attribute } from '../../model/generated/_attribute'
 
 import { Interaction } from '../../model'
 import { SetMetadata } from '../nfts/types'
 import { COLLECTION_OFFER } from '../../environment'
-import { type Attribute as HyperAttribute, attributeFrom as hyperAttributeFrom } from '@kodadot1/hyperdata'
+import { type Attribute as HyperAttribute } from '@kodadot1/hyperdata'
 
 export type BaseCall = {
   caller: string
@@ -31,20 +29,20 @@ export type BaseCall = {
 
 export const fieldSelection = {
   block: {
-    timestamp: true
+    timestamp: true,
   },
   extrinsic: {
     signature: true,
   },
   call: {
-      name: true,
-      args: true,
-      origin: true
+    name: true,
+    args: true,
+    origin: true,
   },
   event: {
-      name: true,
-      args: true,
-  }
+    name: true,
+    args: true,
+  },
 } as const
 
 export type SelectedFields = typeof fieldSelection
@@ -54,7 +52,6 @@ export type Block = _Block<Fields>
 export type Event = _Event<Fields>
 export type Call = _Call<Fields>
 export type Extrinsic = _Extrinsic<Fields>
-
 
 export type CollectionInteraction = Interaction.CREATE | Interaction.DESTROY
 
@@ -71,7 +68,7 @@ export function collectionEventFrom(
 /**
  * Check is current entity is NFT
  * @param event - event should satisfy { collectionId: string, sn: string } interface
-**/
+ **/
 export function isNFT<T extends SetMetadata>(event: T) {
   return event.sn !== undefined
 }
@@ -79,7 +76,7 @@ export function isNFT<T extends SetMetadata>(event: T) {
 /**
  * Check is current entity is Offer
  * @param event - event should satisfy { collectionId: string, sn: string } interface
-**/
+ **/
 export function isOffer<T extends SetMetadata>(event: T): boolean {
   return event.collectionId === COLLECTION_OFFER
 }
@@ -112,14 +109,14 @@ export function attributeFrom(attribute: HyperAttribute): Attribute {
 }
 
 export type ManagedStore = SquidStore & { em: () => EntityManager }
-export type Store =  SquidStore // & { em: () => EntityManager }
+export type Store = SquidStore // & { em: () => EntityManager }
 export type BatchContext<S = Store> = DataHandlerContext<S, Fields>
 export type SelectedBlock = Pick<BlockHeader<Fields>, 'height' | 'timestamp' | 'hash'>
 export type SelectedEvent = Pick<Event, 'name' | 'args'>
 export type SelectedExtrinsic = Pick<Extrinsic, 'signature'>
 export type SelectedCall = Pick<Call, 'name' | 'origin' | 'args'>
 
-export type Context<S = Store>  = {
+export type Context<S = Store> = {
   store: S
   block: SelectedBlock
   event: SelectedEvent
