@@ -221,9 +221,9 @@ const globalHandler: Record<string, HandlerFunction> = {
  **/
 export async function mainFrame(ctx: BatchContext<Store>): Promise<void> {
   const start = ctx.blocks[0].header.height
-  if (STARTING_BLOCK === start) {
-    await forceAssets(ctx)
-  }
+  // if (STARTING_BLOCK === start) {
+  //   await forceAssets(ctx)
+  // }
 
   logger.info(
     `Processing ${ctx.blocks.length} blocks from ${ctx.blocks[0].header.height} to ${

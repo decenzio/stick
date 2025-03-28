@@ -3,14 +3,12 @@ import { TypeormDatabase as Database } from '@subsquid/typeorm-store'
 import logger from './mappings/utils/logger'
 import { Asset, NewNonFungible, NonFungible, NonFungibleAccount, NonFungibleCall, Unique } from './processable'
 
-import { CHAIN, getNodeUrl, UNIQUES_ENABLED } from './environment'
+import { CHAIN, getNodeUrl, UNIQUES_ENABLED, STARTING_BLOCK } from './environment'
 import { mainFrame } from './mappings'
 import { SelectedFields, fieldSelection } from './mappings/utils/types'
 
 const database = new Database({ supportHotBlocks: false })
 const processor = new SubstrateProcessor<SelectedFields>()
-
-const STARTING_BLOCK = 10
 
 // In case you need custom types
 // processor.setTypesBundle(CHAIN)
