@@ -1,6 +1,9 @@
 FROM node:20-alpine AS node
 FROM node AS node-with-gyp
+RUN apk add --no-cache python3 make g++ && ln -sf python3 /usr/bin/python
+
 FROM node-with-gyp AS builder
+
 WORKDIR /squid
 ADD package.json .
 ADD package-lock.json .

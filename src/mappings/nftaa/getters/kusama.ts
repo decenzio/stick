@@ -9,12 +9,12 @@ export function getCreateNftaaEvent(ctx: Event): CreateNftaaEvent {
   const event = events.nftaaCreated
 
   if (event.v700.is(ctx)) {
-    const { collection: classId, item: itemId, nft_account } = event.v700.decode(ctx)
-    return { collection: classId.toString(), item: itemId.toString(), nft_account: addressOf(nft_account) }
+    const { collection: classId, item: itemId, nftAccount } = event.v700.decode(ctx)
+    return { collection: classId.toString(), item: itemId.toString(), nft_account: addressOf(nftAccount) }
   }
 
-  const { collection: classId, item: itemId, nft_account } = event.v700.decode(ctx)
-  return { collection: classId.toString(), item: itemId.toString(), nft_account: addressOf(nft_account) }
+  const { collection: classId, item: itemId, nftAccount } = event.v700.decode(ctx)
+  return { collection: classId.toString(), item: itemId.toString(), nft_account: addressOf(nftAccount) }
 }
 
 export function getTransferNftaaEvent(ctx: Event): TransferNftaaEvent {

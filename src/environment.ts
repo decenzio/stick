@@ -10,7 +10,7 @@ export const STARTING_BLOCK = UNIQUES_ENABLED ? UNIQUE_STARTING_BLOCK : NFT_STAR
 
 // Asset Hub
 const ARCHIVE_URL = `https://v2.archive.subsquid.io/network/asset-hub-${CHAIN}`
-const NODE_URL = `ws://127.0.0.1:9944`
+const NODE_URL = `ws://127.0.0.1:9920`
 
 export const isProd = CHAIN !== 'rococo'
 

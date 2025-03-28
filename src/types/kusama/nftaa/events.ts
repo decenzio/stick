@@ -46,7 +46,7 @@ export const nftaaProxyExecuted = {
   /**
    * A proxy call was executed through an NFTAA. \[collection, item, result\]
    */
-  v1: new EventType('Nftaa.ProxyExecuted', sts.tuple([sts.number(), sts.number(), sts.result()])),
+  v1: new EventType('Nftaa.ProxyExecuted', sts.tuple([sts.number(), sts.number(), sts.any()])),
   /**
    * A proxy call was executed through an NFTAA.
    */
@@ -55,7 +55,7 @@ export const nftaaProxyExecuted = {
     sts.struct({
       collection: sts.number(),
       item: sts.number(),
-      result: sts.result(),
+      result: sts.any(),
     })
   ),
 }
