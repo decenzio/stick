@@ -2,7 +2,6 @@ import { logger } from '@kodadot1/metasquid/logger'
 
 import { Store } from '@subsquid/typeorm-store'
 import { STARTING_BLOCK } from '../environment'
-import { NFTEntity as NE } from '../model'
 import { Asset, NonFungible, NonFungibleCall, NewNonFungible, Unique, NonFungibleAccount } from '../processable'
 import * as a from './assets'
 import * as n from './nfts'

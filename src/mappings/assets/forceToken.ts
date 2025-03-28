@@ -5,23 +5,26 @@ import { AssetEntity } from '../../model'
 import { pending, success } from '../utils/logger'
 import { BatchContext } from '../utils/types'
 
-
 const OPERATION = 'ASSET_REGISTER' as any
 
 type Asset = {
-  name: string,
-  symbol: string,
-  decimals: number,
+  name: string
+  symbol: string
+  decimals: number
 }
 
-const systemAsset: Record<Chain, Asset> = 
-{
+const systemAsset: Record<Chain, Asset> = {
   kusama: {
     name: 'Kusama',
     symbol: 'KSM',
     decimals: 12,
   },
   polkadot: {
+    name: 'Polkadot',
+    symbol: 'DOT',
+    decimals: 10,
+  },
+  localhost: {
     name: 'Polkadot',
     symbol: 'DOT',
     decimals: 10,
@@ -44,7 +47,7 @@ export async function forceCreateSystemAsset(context: BatchContext<Store>): Prom
   const selected = systemAsset[CHAIN]
 
   const asset = create<AssetEntity>(AssetEntity, '', selected)
-  success(OPERATION,`${asset.id} is ${asset.name || ''}`)
+  success(OPERATION, `${asset.id} is ${asset.name || ''}`)
   await context.store.save<AssetEntity>(asset)
 }
 
@@ -59,7 +62,7 @@ export async function forceCreateUsdtAsset(context: BatchContext): Promise<void>
     symbol: 'USDt',
     decimals: 6,
   })
-  success(OPERATION,`${asset.id} is ${asset.name || ''}`)
+  success(OPERATION, `${asset.id} is ${asset.name || ''}`)
   await context.store.save<AssetEntity>(asset)
 }
 
@@ -74,6 +77,6 @@ export async function forceCreateRmrkAsset(context: BatchContext): Promise<void>
     symbol: 'RMRK',
     decimals: 10,
   })
-  success(OPERATION,`${asset.id} is ${asset.name || ''}`)
+  success(OPERATION, `${asset.id} is ${asset.name || ''}`)
   await context.store.save<AssetEntity>(asset)
 }

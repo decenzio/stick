@@ -3,17 +3,14 @@ import { TypeormDatabase as Database } from '@subsquid/typeorm-store'
 import logger from './mappings/utils/logger'
 import { Asset, NewNonFungible, NonFungible, NonFungibleAccount, NonFungibleCall, Unique } from './processable'
 
-import { CHAIN, getArchiveUrl, getNodeUrl, UNIQUES_ENABLED } from './environment'
+import { CHAIN, getNodeUrl, UNIQUES_ENABLED } from './environment'
 import { mainFrame } from './mappings'
 import { SelectedFields, fieldSelection } from './mappings/utils/types'
 
 const database = new Database({ supportHotBlocks: false })
 const processor = new SubstrateProcessor<SelectedFields>()
 
-const UNIQUE_STARTING_BLOCK = 0 // 618838;
-const _NFT_STARTING_BLOCK = 4_556_552
-const STARTING_BLOCK = UNIQUE_STARTING_BLOCK
-const ONLY_ARCHIVE = false
+const STARTING_BLOCK = 10
 
 // In case you need custom types
 // processor.setTypesBundle(CHAIN)
@@ -22,18 +19,12 @@ const ONLY_ARCHIVE = false
 processor.setBlockRange({ from: STARTING_BLOCK })
 
 // Get this from the environment based on the chain from .env
-const archive = getArchiveUrl()
 const chain = getNodeUrl()
 
 processor.setRpcEndpoint({
   url: chain,
   rateLimit: 10,
 })
-
-// processor.setGateway(archive)
-
-// disables RPC ingestion and drastically reduce no of RPC calls
-// processor.setRpcDataIngestionSettings({ disabled: ONLY_ARCHIVE })
 
 /**
  * Uniques nft pallet
