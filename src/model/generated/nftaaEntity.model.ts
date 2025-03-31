@@ -1,4 +1,4 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, BigIntColumn as BigIntColumn_, StringColumn as StringColumn_, DateTimeColumn as DateTimeColumn_, IntColumn as IntColumn_} from "@subsquid/typeorm-store"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, BigIntColumn as BigIntColumn_, StringColumn as StringColumn_, DateTimeColumn as DateTimeColumn_} from "@subsquid/typeorm-store"
 import {CollectionEntity} from "./collectionEntity.model"
 
 @Entity_()
@@ -29,9 +29,6 @@ export class NFTAAEntity {
     @Index_()
     @DateTimeColumn_({nullable: false})
     updatedAt!: Date
-
-    @IntColumn_({nullable: false})
-    version!: number
 
     @Index_()
     @StringColumn_({nullable: false})

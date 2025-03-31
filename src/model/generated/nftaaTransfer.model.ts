@@ -1,4 +1,4 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, BigIntColumn as BigIntColumn_, DateTimeColumn as DateTimeColumn_, IntColumn as IntColumn_, StringColumn as StringColumn_} from "@subsquid/typeorm-store"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, BigIntColumn as BigIntColumn_, DateTimeColumn as DateTimeColumn_, StringColumn as StringColumn_} from "@subsquid/typeorm-store"
 import {NFTAAEntity} from "./nftaaEntity.model"
 
 @Entity_()
@@ -25,9 +25,6 @@ export class NFTAATransfer {
     @Index_()
     @DateTimeColumn_({nullable: false})
     updatedAt!: Date
-
-    @IntColumn_({nullable: false})
-    version!: number
 
     @Index_()
     @StringColumn_({nullable: false})

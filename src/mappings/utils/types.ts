@@ -7,6 +7,7 @@ import {
   Extrinsic as _Extrinsic,
   type SubstrateBatchProcessor as SubstrateProcessor,
   BlockHeader,
+  FieldSelection,
 } from '@subsquid/substrate-processor'
 import { nanoid } from 'nanoid'
 import { Store as SquidStore } from '@subsquid/typeorm-store'

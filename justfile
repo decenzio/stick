@@ -29,6 +29,9 @@ build:
 codegen:
 	npx squid-typeorm-codegen
 
+explore-local-sub:
+	npx squid-substrate-metadata-explorer --rpc "ws://localhost:9920" --out substrateVersion.jsonl
+
 typegen TAG=types:
 	npx squid-substrate-typegen {{TAG}}.json
 

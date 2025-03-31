@@ -5,7 +5,6 @@ import { NFTAATransfer as NT, NFTAAEntity as NA } from '../../model'
 import { unwrap } from '../utils/extract'
 import { debug, pending, success } from '../utils/logger'
 import { Action, Context, createTokenId } from '../utils/types'
-import { versionOf } from '../utils/helper'
 import { getTransferNftaaEvent } from './getters'
 
 const OPERATION = Action.NFTAA_TRANSFER
@@ -36,7 +35,6 @@ export async function handleNftaaTransfer(context: Context): Promise<void> {
   final.blockNumber = BigInt(event.blockNumber)
   final.createdAt = event.timestamp
   final.updatedAt = event.timestamp
-  final.version = versionOf(context)
   final.from = event.from
   final.to = event.to
 

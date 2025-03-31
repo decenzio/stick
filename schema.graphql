@@ -93,7 +93,6 @@ type NFTAAEntity @entity {
   address: String! @index
   createdAt: DateTime! @index
   updatedAt: DateTime! @index
-  version: Int!
   hash: String! @index
 }
 
@@ -102,7 +101,6 @@ type NFTAATransfer @entity {
   blockNumber: BigInt @index
   createdAt: DateTime! @index
   updatedAt: DateTime! @index
-  version: Int!
   hash: String! @index
   from: String!
   to: String!
@@ -113,7 +111,6 @@ type NFTAAProxyExecution @entity {
   blockNumber: BigInt @index
   createdAt: DateTime! @index
   updatedAt: DateTime! @index
-  version: Int!
   hash: String! @index
 }
 

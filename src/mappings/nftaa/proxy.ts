@@ -5,7 +5,6 @@ import { NFTAAEntity as NA, NFTAAProxyExecution as NP } from '../../model'
 import { unwrap } from '../utils/extract'
 import { debug, pending, success } from '../utils/logger'
 import { Action, Context, createTokenId } from '../utils/types'
-import { versionOf } from '../utils/helper'
 import { getProxyNftaaEvent } from './getters'
 
 const OPERATION = Action.NFTAA_PROXY
@@ -36,7 +35,6 @@ export async function handleNftaaProxyExecuted(context: Context): Promise<void> 
   final.blockNumber = BigInt(event.blockNumber)
   final.createdAt = event.timestamp
   final.updatedAt = event.timestamp
-  final.version = versionOf(context)
 
   success(OPERATION, `${final.id}`)
   await context.store.save(final)

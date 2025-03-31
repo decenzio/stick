@@ -52,7 +52,7 @@ export async function handleTokenCreate(context: Context): Promise<void> {
   final.recipient = collection.recipient
   final.royalty = collection.royalty
 
-  const mintingPrice = context.call?.args?.witnessData?.mintPrice ?? 0
+  const mintingPrice = BigInt(context.call?.args?.witnessData?.mintPrice ?? 0)
 
   collection.updatedAt = event.timestamp
   collection.nftCount += 1
@@ -83,9 +83,9 @@ export async function handleTokenCreate(context: Context): Promise<void> {
   success(OPERATION, `${final.id}`)
   await context.store.save(final)
   await context.store.save(collection)
-  
+
   const destinationAddress = final.issuer !== final.currentOwner ? final.currentOwner : ''
-  
+
   await createEvent(
     final,
     OPERATION,

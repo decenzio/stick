@@ -1,9 +1,7 @@
-import { NonFungible } from '../../../processable'
 import { nftaa as events } from '../../../types/kusama/events'
-import { addressOf, unHex } from '../../utils/helper'
-import { Event, Call, Optional } from '../../utils/types'
+import { addressOf } from '../../utils/helper'
+import { Event } from '../../utils/types'
 import { CreateNftaaEvent, ProxyExecutedNftaaEvent, TransferNftaaEvent } from '../types'
-import { Surcharge } from '../../../model'
 
 export function getCreateNftaaEvent(ctx: Event): CreateNftaaEvent {
   const event = events.nftaaCreated

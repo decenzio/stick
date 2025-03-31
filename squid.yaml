@@ -14,9 +14,7 @@ deploy:
       - node
       - lib/processor
     env:
-      CHAIN: kusama
-      OFFER: 464
-      UNIQUES_ENABLED: true
+      CHAIN: substrate
   api:
     cmd:
       - npx

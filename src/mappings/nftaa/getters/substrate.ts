@@ -1,4 +1,4 @@
-import { nftaa as events } from '../../../types/localhost/events'
+import { nftaa as events } from '../../../types/substrate/events'
 import { addressOf } from '../../utils/helper'
 import { Event } from '../../utils/types'
 import { CreateNftaaEvent, ProxyExecutedNftaaEvent, TransferNftaaEvent } from '../types'
@@ -28,7 +28,7 @@ export function getTransferNftaaEvent(ctx: Event): TransferNftaaEvent {
 }
 
 export function getProxyNftaaEvent(ctx: Event): ProxyExecutedNftaaEvent {
-  const event = events.nftaaProxyExecuted
+  const event = events.proxyExecuted
 
   if (event.v1.is(ctx)) {
     const { collection: classId, item: itemId, result } = event.v1.decode(ctx)

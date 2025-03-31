@@ -24,9 +24,9 @@ const systemAsset: Record<Chain, Asset> = {
     symbol: 'DOT',
     decimals: 10,
   },
-  localhost: {
-    name: 'Polkadot',
-    symbol: 'DOT',
+  substrate: {
+    name: 'Substrate',
+    symbol: 'UNIT',
     decimals: 10,
   },
   rococo: {

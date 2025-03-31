@@ -1,6 +1,6 @@
 import { NonFungible } from '../../../processable'
-import { nfts as events } from '../../../types/localhost/events'
-import { nfts as calls } from '../../../types/localhost/calls'
+import { nfts as events } from '../../../types/substrate/events'
+import { nfts as calls } from '../../../types/substrate/calls'
 import { addressOf, unHex } from '../../utils/helper'
 import { Event, Call, Optional } from '../../utils/types'
 import {
