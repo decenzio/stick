@@ -13,6 +13,19 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  migrator:
+    build: .
+    environment:
+      - DB_NAME=squid
+      - DB_PORT=5432
+      - DB_HOST=db
+      - DB_PASS=postgres
+    command: ['npm', 'run', 'db:migrate']
+    depends_on:
+      db:
+        condition: service_healthy
+
   api:
     build: .
     environment:
@@ -25,8 +38,8 @@ services:
       - '4350:4350'
     command: ['sqd', 'serve:prod']
     depends_on:
-      db:
-        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
 
   processor:
     build: .
@@ -39,5 +52,5 @@ services:
       - '3000:3000'
     command: ['sqd', 'process:prod']
     depends_on:
-      db:
-        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
