@@ -7,12 +7,12 @@ export const UNIQUES_ENABLED = process.env.UNIQUES === 'true'
 const UNIQUE_STARTING_BLOCK = 323_750 // 618838;
 const NFT_STARTING_BLOCK = 4_556_552
 // export const STARTING_BLOCK = UNIQUES_ENABLED ? UNIQUE_STARTING_BLOCK : NFT_STARTING_BLOCK
-export const STARTING_BLOCK = 55
+export const STARTING_BLOCK = 60
 
 // Asset Hub
 const ARCHIVE_URL = `https://v2.archive.subsquid.io/network/asset-hub-${CHAIN}`
 
-const NODE_URL = CHAIN === 'substrate' ? 'ws://localhost:9920' : `wss://${CHAIN}-asset-hub-rpc.polkadot.io`
+const NODE_URL = CHAIN === 'substrate' ? 'ws://host.docker.internal:9920' : `wss://${CHAIN}-asset-hub-rpc.polkadot.io`
 
 export const isProd = CHAIN !== 'rococo'
 

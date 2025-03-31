@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     container_name: subsquid_db
@@ -15,32 +13,31 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  api:
+    build: .
+    environment:
+      - DB_NAME=squid
+      - DB_PORT=5432
+      - DB_HOST=db
+      - DB_PASS=postgres
+      - GQL_PORT=4350
+    ports:
+      - '4350:4350'
+    command: ['sqd', 'serve:prod']
+    depends_on:
+      db:
+        condition: service_healthy
 
-  # api:
-  #   build: .
-  #   environment:
-  #     - DB_NAME=squid
-  #     - DB_PORT=5432
-  #     - DB_HOST=db
-  #     - DB_PASS=postgres
-  #     - GQL_PORT=4350
-  #   ports:
-  #     - '4350:4350'
-  #   command: ['sqd', 'serve:prod']
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-
-  # processor:
-  #   build: .
-  #   environment:
-  #     - DB_NAME=squid
-  #     - DB_PORT=5432
-  #     - DB_HOST=db
-  #     - DB_PASS=postgres
-  #   ports:
-  #     - '3000:3000'
-  #   command: ['sqd', 'process:prod']
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
+  processor:
+    build: .
+    environment:
+      - DB_NAME=squid
+      - DB_PORT=5432
+      - DB_HOST=db
+      - DB_PASS=postgres
+    ports:
+      - '3000:3000'
+    command: ['sqd', 'process:prod']
+    depends_on:
+      db:
+        condition: service_healthy
