@@ -1,5 +1,6 @@
 import { describe, expect, it, beforeAll, afterAll, test } from 'vitest'
 import { onlyValue, addressOf, unHex } from '../src/mappings/utils/helper'
+import { CHAIN } from '../src/environment'
 
 describe('Helpers', () => {
   // let store: SquidStore;
@@ -25,7 +26,13 @@ describe('Helpers', () => {
   describe('addressOf', () => {
     it('should return a value', () => {
       const value = addressOf('0x30658243d02e18551f0d447dad1065db75b01e570fd47eec86805dbea12a28ed')
-      expect(value).toBe('DfmyFcUiNkVPQdYZuiPLHFWDTSWGk6feN9aHe22ivbFAD6A')
+      if (CHAIN === 'substrate') {
+        expect(value).toBe('5DAAJwGc61jZdkp6oCuLSKtW4sAGU5HVBzJptyk5F8NkRAMT')
+      } else if (CHAIN === 'rococo') {
+        expect(value).toBe('5DAAJwGc61jZdkp6oCuLSKtW4sAGU5HVBzJptyk5F8NkRAMT')
+      } else {
+        expect(value).toBe('DfmyFcUiNkVPQdYZuiPLHFWDTSWGk6feN9aHe22ivbFAD6A')
+      }
     })
 
     test('should throw on invalid', () => {
