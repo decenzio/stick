@@ -7,7 +7,7 @@ export const UNIQUES_ENABLED = process.env.UNIQUES === 'true'
 const UNIQUE_STARTING_BLOCK = 323_750 // 618838;
 const NFT_STARTING_BLOCK = 4_556_552
 // export const STARTING_BLOCK = UNIQUES_ENABLED ? UNIQUE_STARTING_BLOCK : NFT_STARTING_BLOCK
-export const STARTING_BLOCK = 60
+export const STARTING_BLOCK = 0
 
 // Asset Hub
 const ARCHIVE_URL = `https://v2.archive.subsquid.io/network/asset-hub-${CHAIN}`
