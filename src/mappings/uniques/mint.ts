@@ -20,7 +20,7 @@ const OPERATION = Action.MINT
  * @param context - the context for the event
  **/
 export async function handleTokenCreate(context: Context): Promise<void> {
-  pending(OPERATION, context.block.height.toString())
+  pending(OPERATION, `UNIQUES - ${context.block.height.toString()}`)
   const event = unwrap(context, getCreateTokenEvent)
   debug(OPERATION, event)
   const id = createTokenId(event.collectionId, event.sn)

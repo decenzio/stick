@@ -18,6 +18,7 @@ const OPERATION = Action.CREATE
  **/
 export async function handleCollectionCreate(context: Context): Promise<void> {
   pending(OPERATION, `[COLECTTION++]: ${context.block.height}`)
+  pending(OPERATION, `NFTS - ${context.block.height.toString()}`)
   const event = unwrap(context, getCreateCollectionEvent)
   debug(OPERATION, event)
   const final = await getOrCreate(context.store, CE, event.id, {})

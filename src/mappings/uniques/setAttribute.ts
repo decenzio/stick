@@ -1,10 +1,11 @@
 import { getOrFail as get } from '@kodadot1/metasquid/entity'
 import { CollectionEntity, NFTEntity } from '../../model'
 import { unwrap } from '../utils/extract'
-import { unHex } from '../utils/helper'
-import { Context } from '../utils/types'
+import { addressOf, unHex } from '../utils/helper'
+import { Action, Context } from '../utils/types'
 import { getAttributeEvent } from './getters'
 import { attributeFrom, tokenIdOf } from './types'
+import { warn } from '../utils/logger'
 
 /**
  * Handle the attribute set event (Uniques.AttributeSet, Uniques.AttributeCleared)
@@ -22,6 +23,24 @@ export async function handleAttributeSet(context: Context): Promise<void> {
 
   if (!final.attributes) {
     final.attributes = []
+  }
+
+  if (event.trait === 'nftaa_address') {
+    warn(Action.SET_ATTRIBUTE, `nftaa_address - ${JSON.stringify(event)}`)
+    try {
+      const address = addressOf(event.value as string)
+      const addressAttribute = final.attributes.find((attr) => attr.trait === 'nftaa_address')
+      if (addressAttribute) {
+        addressAttribute.value = address
+      } else {
+        final.attributes.push(attributeFrom({ trait_type: 'nftaa_address', value: address }))
+      }
+      await context.store.save(final)
+      return
+    } catch (error) {
+      console.error(`Invalid address for nftaa_address: ${event.value}`, error)
+      return
+    }
   }
 
   if (event.value === null) {

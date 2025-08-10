@@ -1,10 +1,11 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, BigIntColumn as BigIntColumn_, Index as Index_, BooleanColumn as BooleanColumn_, ManyToOne as ManyToOne_, DateTimeColumn as DateTimeColumn_, StringColumn as StringColumn_, OneToMany as OneToMany_, FloatColumn as FloatColumn_, IntColumn as IntColumn_} from "@subsquid/typeorm-store"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, BigIntColumn as BigIntColumn_, Index as Index_, BooleanColumn as BooleanColumn_, ManyToOne as ManyToOne_, DateTimeColumn as DateTimeColumn_, StringColumn as StringColumn_, OneToMany as OneToMany_, FloatColumn as FloatColumn_, IntColumn as IntColumn_, OneToOne as OneToOne_} from "@subsquid/typeorm-store"
 import * as marshal from "./marshal"
 import {Attribute} from "./_attribute"
 import {CollectionEntity} from "./collectionEntity.model"
 import {Event} from "./event.model"
 import {MetadataEntity} from "./metadataEntity.model"
 import {TokenEntity} from "./tokenEntity.model"
+import {NFTAAEntity} from "./nftaaEntity.model"
 
 @Entity_()
 export class NFTEntity {
@@ -91,4 +92,7 @@ export class NFTEntity {
     @Index_()
     @ManyToOne_(() => TokenEntity, {nullable: true})
     token!: TokenEntity | undefined | null
+
+    @OneToOne_(() => NFTAAEntity, e => e.nft)
+    nftaa!: NFTAAEntity | undefined | null
 }

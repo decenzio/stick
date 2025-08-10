@@ -1,5 +1,6 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, BigIntColumn as BigIntColumn_, StringColumn as StringColumn_, DateTimeColumn as DateTimeColumn_} from "@subsquid/typeorm-store"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, BigIntColumn as BigIntColumn_, StringColumn as StringColumn_, DateTimeColumn as DateTimeColumn_, OneToOne as OneToOne_, JoinColumn as JoinColumn_} from "@subsquid/typeorm-store"
 import {CollectionEntity} from "./collectionEntity.model"
+import {NFTEntity} from "./nftEntity.model"
 
 @Entity_()
 export class NFTAAEntity {
@@ -33,4 +34,9 @@ export class NFTAAEntity {
     @Index_()
     @StringColumn_({nullable: false})
     hash!: string
+
+    @Index_({unique: true})
+    @OneToOne_(() => NFTEntity, {nullable: true})
+    @JoinColumn_()
+    nft!: NFTEntity
 }

@@ -1,7 +1,7 @@
 import { warn } from 'node:console'
-import { create, getOptional } from '@kodadot1/metasquid/entity'
+import { create, get } from '@kodadot1/metasquid/entity'
 import md5 from 'md5'
-import { CollectionEntity as CE, NFTAAEntity as NA } from '../../model'
+import { NFTAAEntity as NA, NFTEntity } from '../../model'
 import { unwrap } from '../utils/extract'
 import { debug, pending, success } from '../utils/logger'
 import { Action, Context, createTokenId } from '../utils/types'
@@ -19,10 +19,9 @@ export async function handleNftaaCreate(context: Context): Promise<void> {
   const event = unwrap(context, getCreateNftaa)
   debug(OPERATION, event)
   const id = createTokenId(event.collection, event.item)
-  const collection = await getOptional<CE>(context.store, CE, event.collection)
-
-  if (!collection) {
-    warn(OPERATION, `collection ${event.collection} not found`)
+  const underlyingNft = await get(context.store, NFTEntity, id)
+  if (!underlyingNft) {
+    warn(OPERATION, `nft ${id} not found`)
     return
   }
 
@@ -31,10 +30,10 @@ export async function handleNftaaCreate(context: Context): Promise<void> {
   final.id = id
   final.hash = md5(id)
   final.blockNumber = BigInt(event.blockNumber)
-  final.collection = collection
   final.address = event.nft_account
   final.createdAt = event.timestamp
   final.updatedAt = event.timestamp
+  final.nft = underlyingNft
 
   success(OPERATION, `${final.id}`)
   await context.store.save(final)

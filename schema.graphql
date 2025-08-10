@@ -84,6 +84,7 @@ type NFTEntity @entity {
   updatedAt: DateTime! @index
   version: Int!
   token: TokenEntity
+  nftaa: NFTAAEntity @derivedFrom(field: "nft")
 }
 
 type NFTAAEntity @entity {
@@ -94,6 +95,7 @@ type NFTAAEntity @entity {
   createdAt: DateTime! @index
   updatedAt: DateTime! @index
   hash: String! @index
+  nft: NFTEntity! @unique
 }
 
 type NFTAATransfer @entity {
@@ -241,6 +243,16 @@ type Swap @entity {
   updatedAt: DateTime
 }
 
+# Possible collection types
+# HolderOf: user can mint if they hold a NFT from a specific collection
+# Issuer: only the issuer can mint
+# Public: anyone can mint
+enum CollectionType {
+  HolderOf
+  Issuer
+  Public
+}
+
 # Possible on-chain interactions that we listen for
 enum Interaction {
   BURN
@@ -256,20 +268,12 @@ enum Interaction {
   PAY_ROYALTY
   OFFER
   SWAP
+  SET_ATTRIBUTE
+  # NFTAA
   NFTAA_CREATE
   NFTAA_TRANSFER
   NFTAA_PROXY
   # ROYALTY
-}
-
-# Possible collection types
-# HolderOf: user can mint if they hold a NFT from a specific collection
-# Issuer: only the issuer can mint
-# Public: anyone can mint
-enum CollectionType {
-  HolderOf
-  Issuer
-  Public
 }
 
 enum Surcharge {
