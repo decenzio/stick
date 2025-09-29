@@ -12,7 +12,7 @@ export const STARTING_BLOCK = 0
 // Asset Hub
 const ARCHIVE_URL = `https://v2.archive.subsquid.io/network/asset-hub-${CHAIN}`
 
-const NODE_URL = CHAIN === 'substrate' ? 'ws://host.docker.internal:9920' : `wss://${CHAIN}-asset-hub-rpc.polkadot.io`
+const NODE_URL = CHAIN === 'substrate' ? 'ws://localhost:9920' : `wss://${CHAIN}-asset-hub-rpc.polkadot.io`
 
 export const isProd = CHAIN !== 'rococo'
 

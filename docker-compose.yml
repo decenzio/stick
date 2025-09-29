@@ -7,9 +7,9 @@ services:
       POSTGRES_PASSWORD: postgres
     shm_size: 1gb
     ports:
-      - '${DB_PORT}:5432'
+      - "${DB_PORT}:5432"
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres -d squid']
+      test: ["CMD-SHELL", "pg_isready -U postgres -d squid"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -21,7 +21,7 @@ services:
       - DB_PORT=5432
       - DB_HOST=db
       - DB_PASS=postgres
-    command: ['npm', 'run', 'db:migrate']
+    command: ["npm", "run", "db:migrate"]
     depends_on:
       db:
         condition: service_healthy
@@ -35,8 +35,8 @@ services:
       - DB_PASS=postgres
       - GQL_PORT=4350
     ports:
-      - '4350:4350'
-    command: ['sqd', 'serve:prod']
+      - "4350:4350"
+    command: ["sqd", "serve:prod"]
     depends_on:
       migrator:
         condition: service_completed_successfully
@@ -49,8 +49,8 @@ services:
       - DB_HOST=db
       - DB_PASS=postgres
     ports:
-      - '3000:3000'
-    command: ['sqd', 'process:prod']
+      - "3000:3000"
+    command: ["sqd", "process:prod"]
     depends_on:
       migrator:
         condition: service_completed_successfully
