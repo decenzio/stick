@@ -48,6 +48,7 @@ services:
       - DB_PORT=5432
       - DB_HOST=db
       - DB_PASS=postgres
+      - SUBSTRATE_HOST=${SUBSTRATE_HOST}
     ports:
       - "3000:3000"
     command: ["sqd", "process:prod"]
